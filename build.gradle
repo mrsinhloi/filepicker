@@ -4,10 +4,10 @@ buildscript {
     
     repositories {
         google()
+        maven { url "https://jitpack.io" }
         mavenCentral()
-        mavenLocal()
-        gradlePluginPortal()
-        jcenter()
+//        jcenter()
+//        mavenLocal()
 
     }
     dependencies {
@@ -22,10 +22,10 @@ buildscript {
 allprojects {
     repositories {
         google()
+        maven { url "https://jitpack.io" }
         mavenCentral()
-        mavenLocal()
-        jcenter()
-
+//        jcenter()
+//        mavenLocal()
 
     }
 }

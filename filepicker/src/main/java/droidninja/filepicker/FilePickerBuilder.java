@@ -2,16 +2,16 @@ package droidninja.filepicker;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
+
 import androidx.annotation.DrawableRes;
 import androidx.fragment.app.Fragment;
-import androidx.core.content.ContextCompat;
+
 import android.widget.Toast;
 
 import droidninja.filepicker.models.FileType;
 import droidninja.filepicker.models.sort.SortingTypes;
+import droidninja.filepicker.utils.Permission13Utils;
 import droidninja.filepicker.utils.Orientation;
 
 import java.util.ArrayList;
@@ -153,14 +153,12 @@ public class FilePickerBuilder {
     }
 
     private void start(Activity context, int requestCode) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(context, FilePickerConst.PERMISSIONS_FILE_PICKER)
-                    != PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(context,
-                        context.getResources().getString(R.string.permission_filepicker_rationale),
-                        Toast.LENGTH_SHORT).show();
-                return;
-            }
+        boolean granted = Permission13Utils.checkPermission(context);
+        if (!granted) {
+            Toast.makeText(context,
+                    context.getResources().getString(R.string.permission_filepicker_rationale),
+                    Toast.LENGTH_SHORT).show();
+            return;
         }
 
         PickerManager.getInstance()
@@ -174,14 +172,12 @@ public class FilePickerBuilder {
     }
 
     private void start(Fragment fragment, int requestCode) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(fragment.getContext(),
-                    FilePickerConst.PERMISSIONS_FILE_PICKER) != PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(fragment.getContext(), fragment.getContext()
-                        .getResources()
-                        .getString(R.string.permission_filepicker_rationale), Toast.LENGTH_SHORT).show();
-                return;
-            }
+        boolean granted = Permission13Utils.checkPermission(fragment.getContext());
+        if (!granted) {
+            Toast.makeText(fragment.getContext(), fragment.getContext()
+                    .getResources()
+                    .getString(R.string.permission_filepicker_rationale), Toast.LENGTH_SHORT).show();
+            return;
         }
 
         PickerManager.getInstance()

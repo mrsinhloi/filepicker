@@ -1,18 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="droidninja.filepicker">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <queries>
+        <!-- Camera -->
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+
+        <!-- Browser -->
+        <!--<intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>-->
+
+        <!-- Gallery -->
+        <!--<intent>
+            <action android:name="android.intent.action.GET_CONTENT" />
+        </intent>-->
+    </queries>
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <!--android 13-->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO"/>
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <!-- Đã add bên trên nên không add nữa <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>-->
+
+    <!--android 13-->
 
     <application
         android:allowBackup="true"
         android:supportsRtl="true">
         <activity
             android:name=".FilePickerActivity"
+            android:exported="false"
             android:configChanges="orientation|screenSize" />
         <activity
             android:name=".MediaDetailsActivity"
+            android:exported="false"
             android:configChanges="orientation|screenSize" />
 
         <provider

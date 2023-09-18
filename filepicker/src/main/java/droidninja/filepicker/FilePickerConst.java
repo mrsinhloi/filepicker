@@ -1,6 +1,6 @@
 package droidninja.filepicker;
 
-import android.Manifest;
+import droidninja.filepicker.utils.Permission13Utils;
 
 /**
  * Created by droidNinja on 28/07/16.
@@ -34,8 +34,7 @@ public class FilePickerConst {
     public final static int MEDIA_TYPE_IMAGE = 1;
     public final static int MEDIA_TYPE_VIDEO = 3;
 
-    public final static String PERMISSIONS_FILE_PICKER =
-            Manifest.permission.WRITE_EXTERNAL_STORAGE;
+    public final static String[] PERMISSIONS_FILE_PICKER = Permission13Utils.getArrPermissions();
 
     public final static String[] docExtensions = {"ppt", "pptx", "xls", "xlsx", "doc", "docx", "dot", "dotx"};
 

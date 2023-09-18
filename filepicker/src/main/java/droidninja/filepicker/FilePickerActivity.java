@@ -3,11 +3,12 @@ package droidninja.filepicker;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 
 import droidninja.filepicker.fragments.DocFragment;
 import droidninja.filepicker.fragments.DocPickerFragment;
@@ -25,7 +26,7 @@ public class FilePickerActivity extends BaseFilePickerActivity
     private int type;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState, R.layout.activity_file_picker);
     }
 

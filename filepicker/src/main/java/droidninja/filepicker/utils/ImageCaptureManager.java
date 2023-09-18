@@ -10,6 +10,7 @@ import android.os.SystemClock;
 import android.provider.MediaStore;
 
 import androidx.core.content.FileProvider;
+
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -58,18 +59,14 @@ public class ImageCaptureManager {
 
     public Intent dispatchTakePictureIntent(Context context) throws IOException {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-// Ensure that there's a camera activity to handle the intent
+        // Ensure that there's a camera activity to handle the intent
         if (takePictureIntent.resolveActivity(mContext.getPackageManager()) != null) {
-// Create the File where the photo should go
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                File newFile = createImageFile();
-                takePictureIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                takePictureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-                Uri photoURI = FileProvider.getUriForFile(context, PickerManager.getInstance().getProviderAuthorities(), newFile);
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-            } else {
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(createImageFile()));
-            }
+            // Create the File where the photo should go
+            File newFile = createImageFile();
+            takePictureIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            takePictureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            Uri photoURI = FileProvider.getUriForFile(context, PickerManager.getInstance().getProviderAuthorities(), newFile);
+            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
             return takePictureIntent;
         }
         return null;
